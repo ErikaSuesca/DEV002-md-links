@@ -9,6 +9,7 @@ const absolutePath = (paths) => {
   return path.isAbsolute(paths) ? paths : path.resolve(paths);
 };
 
+// Función para validar si es tipo .md
 const existFile = (pathAbsolute) => {
   const pathFile = path.extname(pathAbsolute);
   if (pathFile === '.md'){
