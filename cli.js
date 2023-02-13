@@ -1,9 +1,9 @@
 const { mdLinks } = require("./index.js");
 const chalk = require('chalk');
 
-console.log(chalk.yellow('--------------------Bienvenidos a mi librería 📁--------------------'));
+console.log(chalk.cyan.inverse('--------------------Bienvenidos a mi librería 📁--------------------'));
 
-mdLinks("./testing/test1.md")
+mdLinks('./package.json')
   .then((result) => {
     console.log(result)
   })
@@ -11,3 +11,6 @@ mdLinks("./testing/test1.md")
     console.log(error);
   });
 
+// ruta .md con links './testing/test1.md'
+// ruta .md sin links './testing/test0.md'
+// ruta archivo no .md './package.json'
