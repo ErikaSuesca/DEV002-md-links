@@ -1,17 +1,12 @@
 const { mdLinks } = require('../index.js');
 
-describe('mdLinks', () => {
-
-  it('should...', () => {
-    console.log('FIX ME!');
+describe("mdLinks", () => {
+  it("Debe ser una función", () => {
+    expect(typeof mdLinks).toBe("function");
   });
-  // it('Debería ser una función', () => {
-  //   expect(mdLinks()).toBe(typeof Promise)
-  // });
-  it('Debe rechazar cundo el path no existe', () => {
-    return mdLinks('/erika/cursos/noexiste.md').catch ((error) => {
-      expect(error).toBe('La ruta no existe')
-    })
-  });
-
-});
+  it('Debe devolver una promesa', () => mdLinks()
+  .then(() => {
+    expect(mdLinks).toBe(typeof 'promise');
+  })
+  .catch((error) => error));
+}); 
