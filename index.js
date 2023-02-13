@@ -1,10 +1,10 @@
-const { absolutePath } = require("./functions.js");
+const { relativePath } = require("./functions.js");
 const chalk = require("chalk");
 
 const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
     // Identificar si la ruta exite
-    absolutePath()
+    relativePath()
       .then((respuesta) => {
         console.log(chalk.yellow(respuesta));
       })
