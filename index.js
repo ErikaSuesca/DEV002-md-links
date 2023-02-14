@@ -5,17 +5,17 @@ const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
     // Identificar si la ruta exite
     if (!existPath(path)) {
-      reject(chalk.yellowBright("The path does not exist"));
+      reject("The path does not exist");
     } else {
       console.log(chalk.yellowBright("The path exist"));
       // Se valida si la ruta es absoluta o reltiva
       const pathAbsolute = absolutePath(path);
-      // Es un archivo tipo .md?
-      if (!existFile(pathAbsolute)) {
-        reject(chalk.redBright("The file is not .md type"));
-      } else {
-        console.log(chalk.green("The file is a .md type"));
-      }
+    // Es un archivo tipo .md? 
+    if (!existFile(pathAbsolute)) {
+      reject('The file is not .md type');
+    } else {
+      console.log(chalk.green('The file is a .md type'));
+    }
     }
   });
 };
