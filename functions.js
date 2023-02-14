@@ -27,7 +27,7 @@ console.log(chalk.yellow(readingDirectory('./testing')));
 
 // Función que lee un archivo .md
 const validateReadFileMd = (paths) => fs.readFileSync(paths, 'utf8');
-console.log(chalk.blue(validateReadFileMd('./testing/test1.md')));
+console.log(chalk.blue(validateReadFileMd('./testing/test01.md')));
 
 
 module.exports = {
