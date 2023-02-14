@@ -1,17 +1,18 @@
 const { mdLinks } = require('../index.js');
 
-describe('mdLinks', () => {
-
-  it('should...', () => {
-    console.log('FIX ME!');
+describe("mdLinks", () => {
+  it("Debe ser una función", () => {
+    expect(typeof mdLinks).toBe("function");
   });
-  // it('Debería ser una función', () => {
-  //   expect(mdLinks()).toBe(typeof Promise)
-  // });
-  it('Debe rechazar cundo el path no existe', () => {
-    return mdLinks('/erika/cursos/noexiste.md').catch ((error) => {
-      expect(error).toBe('La ruta no existe')
-    })
-  });
-
-});
+  it('Debe devolver una promesa', () => mdLinks()
+  .then(() => {
+    expect(mdLinks).toBe(typeof 'promise');
+  })
+  .catch((error) => error));
+  it('Debe retornar error en la promesa si no encuentra un path', () => mdLinks('erika/path.md').catch((error) => {
+    expect(error).toEqual("The path does not exist");
+  }));
+  it('Debe retornar error la promesa si el archivo no es de tipo .md', () => mdLinks('./index.js').catch((error) => {
+    expect(error).toEqual("The file is not .md type");
+  }));
+}); 
