@@ -13,7 +13,7 @@ const absolutePath = (paths) => {
 // Funcion para validar si el archivo es .md y su extención
 const existFile = (paths) => path.extname(paths) === '.md';
 
-//Función para validar si es un File (archivo)
+//Función para validar si es un File (archivo).
 const validateFile = (paths) => fs.statSync(paths).isFile();
 console.log(chalk.magenta(validateFile('./testing/Test0.md')));
 
