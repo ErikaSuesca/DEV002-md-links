@@ -21,7 +21,7 @@ console.log(chalk.magenta(validateFile('./testing/Test0.md')));
 const validateDirectory =  (paths) => fs.statSync(paths).isDirectory();
 console.log(chalk.blue(validateDirectory('./testing')));
 
-// Función para leer un directorio
+// Función para leer un directorio.
 const readingDirectory = (paths) => fs.readdirSync(paths);
 console.log(chalk.yellow(readingDirectory('./testing')));
 
