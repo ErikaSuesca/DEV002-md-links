@@ -13,7 +13,7 @@ const absolutePath = (paths) => {
 // Funcion para validar si el archivo es .md y su extención
 const existFile = (paths) => path.extname(paths) === '.md';
 
-//Función para validar si es un File (archivo)
+//Función para validar si es un File (archivo).
 const validateFile = (paths) => fs.statSync(paths).isFile();
 console.log(chalk.magenta(validateFile('./testing/Test0.md')));
 
@@ -21,13 +21,13 @@ console.log(chalk.magenta(validateFile('./testing/Test0.md')));
 const validateDirectory =  (paths) => fs.statSync(paths).isDirectory();
 console.log(chalk.blue(validateDirectory('./testing')));
 
-// Función para leer un directorio
+// Función para leer un directorio.
 const readingDirectory = (paths) => fs.readdirSync(paths);
 console.log(chalk.yellow(readingDirectory('./testing')));
 
 // Función que lee un archivo .md
 const validateReadFileMd = (paths) => fs.readFileSync(paths, 'utf8');
-console.log(chalk.blue(validateReadFileMd('./testing/test1.md')));
+console.log(chalk.blue(validateReadFileMd('./testing/test01.md')));
 
 
 module.exports = {
