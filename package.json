@@ -30,5 +30,8 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "jest": "^29.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.34.0"
   }
 }
