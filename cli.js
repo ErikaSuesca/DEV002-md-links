@@ -4,7 +4,7 @@ const chalk = require('chalk');
 
 console.log(chalk.cyan.inverse('--------------------Welcome 📁--------------------'));
 
-mdLinks('./package.json')
+mdLinks('./testing/test01.md')
   .then((result) => {
     console.log(result)
   })
