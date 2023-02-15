@@ -2,7 +2,7 @@
 const { mdLinks } = require("./index.js");
 const chalk = require('chalk');
 
-console.log(chalk.cyan.inverse('--------------------Bienvenidos a mi librería 📁--------------------'));
+console.log(chalk.cyan.inverse('--------------------Welcome 📁--------------------'));
 
 mdLinks('./package.json')
   .then((result) => {
