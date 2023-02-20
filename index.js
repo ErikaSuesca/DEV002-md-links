@@ -16,18 +16,23 @@ const mdLinks = (path, options) => {
       reject("The path does not exist");
     } else {
       console.log(chalk.magenta("The path exist"));
-      // Se valida si la ruta es absoluta o relativa
-      const pathAbsolute = absolutePath(path); 
+      //Se valida si la ruta es absoluta o relativa
+      const pathAbsolute = absolutePath(path);
       console.log("ABSOLUTE: ", pathAbsolute);
       // Es un archivo tipo .md?
       if (existFile(pathAbsolute)) {
         console.log(chalk.green("The file is a .md type"));
-        const texto = validateReadFileMd(pathAbsolute);
-        const links = getLinks(texto);
+        // Se valida si hay o no links 
+        const text = validateReadFileMd(pathAbsolute);
+        const links = getLinks(text);
         let arrayLinks = [];
-        links.forEach(element => {
-          arrayLinks.push(linkToObject(element, pathAbsolute));
-        });
+        if (links != null) {
+          links.forEach((element) => {
+            arrayLinks.push(linkToObject(element, pathAbsolute));
+          });
+        } else {
+          reject("The file does not have links");
+        }
         console.log("LINKS: ", arrayLinks);
       } else {
         reject("The file is not .md type");

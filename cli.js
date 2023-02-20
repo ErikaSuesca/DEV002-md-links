@@ -4,7 +4,7 @@ const chalk = require('chalk');
 
 console.log(chalk.cyan.inverse('--------------------Welcome 📁--------------------'));
 
-mdLinks('./testing/test01.md')
+mdLinks('./testing/testing01/test02.md')
   .then((result) => {
     console.log(result)
   })
@@ -12,6 +12,6 @@ mdLinks('./testing/test01.md')
     console.log(error);
   });
 
-// ruta .md con links './testing/test1.md'
+// ruta .md con links './testing/test01.md'
 // ruta .md sin links './testing/test0.md'
 // ruta archivo no .md './package.json'
