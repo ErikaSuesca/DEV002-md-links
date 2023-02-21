@@ -48,6 +48,23 @@ const linkToObject = (db, paths) => {
       return {href: linkURL, text: linkText, file: paths}
 }
 
+// Función para buscar archivos .md con su ruta para poder guardarlos los archivos en un array
+const readingDirandFile = (paths) => {
+  const pathAbsolute = absolutePath(paths);
+  let filesArray = [];
+  if (absolutePath(pathAbsolute) && validateFile(paths)){
+    if(existFile(pathAbsolute)){
+      filesArray.push(pathAbsolute);
+    }
+  }else{
+    const verifyReadDir = readingDirectory(paths);
+    verifyReadDir.forEach((paths) => {
+      filesArray = filesArray.concat(readingDirandFile(path.join(pathAbsolute, paths)));
+    })
+  } 
+  return filesArray;
+}
+
 module.exports = {
   existPath,
   absolutePath,
@@ -58,4 +75,5 @@ module.exports = {
   validateReadFileMd,
   getLinks,
   linkToObject,
+  readingDirandFile
 };

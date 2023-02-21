@@ -1,5 +1,8 @@
 const { existPath, absolutePath, existFile, validateReadFileMd } = require("../functions.js");
 
+// Method process.cwd = current working directory
+const currentDir = `${process.cwd()}`;
+
 describe("existPath", () => {
   it("Debe validar cuando el path existe", () => {
     existPath("./testing/test01.md");
@@ -15,15 +18,11 @@ describe("existPath", () => {
 describe("absolutePath", () => {
   it("Debe cambiar a absoluta si es relativa", () => {
     absolutePath("./README.md");
-    expect(absolutePath("./README.md")).toEqual(
-      "C:\\Users\\Erika\\Desktop\\DEV002-md-links\\README.md"
-    );
+    expect(absolutePath(`${currentDir}\\README.md`)).toEqual(`${currentDir}\\README.md`);
   });
   it("Debe devolver la ruta si ya es absoluta", () => {
-    absolutePath("./README.md");
-    expect(absolutePath("./README.md")).toEqual(
-      "C:\\Users\\Erika\\Desktop\\DEV002-md-links\\README.md"
-    );
+    absolutePath(`${currentDir}\\README.md`);
+    expect(absolutePath(`${currentDir}\\README.md`)).toEqual(`${currentDir}\\README.md`);
   });
 });
 
@@ -42,7 +41,7 @@ describe("existFile", () => {
 // // Test para validar leer un archivo .md 
 describe('validateReadFileMd', () => {
   it('Debe devolver el contenido del archivo', () =>{
-    expect(validateReadFileMd('C:\\Users\\Erika\\Desktop\\DEV002-md-links\\testing\\testing01\\test02.md'))
+    expect(validateReadFileMd(`${currentDir}\\test04.md`))
     .toEqual('explorar [Jest](https://jestjs.io/)');
   });
 });

@@ -1,0 +1,1 @@
+explorar [Jest](https://jestjs.io/)

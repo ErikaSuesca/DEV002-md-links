@@ -4,7 +4,7 @@ const chalk = require('chalk');
 
 console.log(chalk.cyan.inverse('--------------------Welcome 📁--------------------'));
 
-mdLinks('./testing/testing01/test02.md')
+mdLinks('./testing', { validate: false, stats: true })
   .then((result) => {
     console.log(result)
   })
