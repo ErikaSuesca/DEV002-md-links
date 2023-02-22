@@ -1,17 +1,16 @@
 const fs = require("fs");
 const path = require("path");
 const chalk = require('chalk');
+const axios = require('axios').default;
 
 // Función para validar si existe la ruta
-const existPath = (paths) => fs.existsSync(paths);
+const existPath = (paths) => fs.existsSync(paths); // CUMPLE
 
-// Función para validar si la ruta es absoluta o relativa, y si es relativa la convierte a absoluta
-const absolutePath = (paths) => {
-  return path.isAbsolute(paths) ? paths : path.resolve(paths); 
-};
+// Función para validar si es un directorio
+const validateDirectory =  (paths) => fs.statSync(paths).isDirectory(); // CUMPLE
 
 // Función para validar si el archivo es .md y su extención
-const existFile = (paths) => path.extname(paths) === '.md';
+const existMdFile = (paths) => path.extname(paths) === '.md';
 
 
 //Función para validar si es un File (archivo)
@@ -20,15 +19,6 @@ const validateFile = (paths) => fs.statSync(paths).isFile();
 
 // Función que lee un archivo .md
 const validateReadFileMd = (paths) => fs.readFileSync(paths, 'utf8');
-// console.log(validateReadFileMd('./testing/test01.md'));
-
-// Función para validar si es un directorio
-const validateDirectory =  (paths) => fs.statSync(paths).isDirectory();
-// console.log(validateDirectory('./testing'));
-
-// Función para leer un directorio
-const readingDirectory =(paths) => fs.readdirSync(paths);
-// console.log(readingDirectory('./testing'));
 
 // Función para obtener los links 
 const getLinks = (text) => {
@@ -38,7 +28,7 @@ const getLinks = (text) => {
 
 // Función para extraer los links de un archivo .md, devuelve array de objetos
 const linkToObject = (db, paths) => {
-  console.log(db)
+  //console.log(db)
   const urlRegex = /\((https?:\/\/[^\s]+)(?: "(.+)")?\)|(https?:\/\/[^\s]+)/ig;
   const textRegex = /\[(\w+.+?)\]/gi;
       let extractedURL = db.match(urlRegex).toString();
@@ -65,15 +55,63 @@ const readingDirandFile = (paths) => {
   return filesArray;
 }
 
+function httpRequest(data) {
+  let promises = [];
+  console.log(data)
+
+  if (data === null || data === undefined) {
+      return null
+  } else {
+      data.forEach(element => {
+          let axiosPromise = axios({
+              method: 'get',
+              url:`${element.href}`,
+              responseType: 'stream'
+            })
+            .then(response => {
+              element.status = response.status;
+              element.ok = response.statusText;
+              return element;
+            })
+            .catch(error => {
+              element.status = error?.response?.status;
+              element.ok = 'FAIL';
+              return element;
+            });
+
+            promises.push(axiosPromise);
+      })
+      
+      return Promise.all(promises);
+  }
+};
+
+function readAllFilesRecursive(route) {
+  if (validateDirectory(route)) {
+    const files = fs.readdirSync(route)
+    return files.map((file) => {
+      return readAllFilesRecursive(`${route}/${file}`)
+    }).flat()
+
+  } else {
+    return [route]
+  }
+}
+
+
+
+
+
+
+
+
 module.exports = {
   existPath,
-  absolutePath,
-  existFile,
-  validateFile,
+  existMdFile,
   validateDirectory,
-  readingDirectory,
   validateReadFileMd,
   getLinks,
   linkToObject,
-  readingDirandFile
+  httpRequest,
+  readAllFilesRecursive
 };
