@@ -138,7 +138,8 @@ module.exports = {
   validateDirectory,
   getResultValidateStats,
   getAllFilesDirectory,
-  analyzeMdFilesArray, 
+  analyzeMdFilesArray,  
   getHttpResponse,
   getStatsResult,
+  getLinksDocument
 };
