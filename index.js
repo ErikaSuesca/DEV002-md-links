@@ -24,7 +24,7 @@ const mdLinks = (path, options) => {
       const absolutePath = convertToAbsolute(path); // Se convierte path a absolute
       if(validateDirectory(absolutePath)){ // valida que el path sea de un directorio
         getAllFilesDirectory(absolutePath).forEach(file => { // readAllFilesRecursive obtiene los archivos que hay dentro del directorio
-          if(existMdFile(file)){ // valida archivo por archivo para saber si es o no .MD
+          if(!existMdFile(file)){ // valida archivo por archivo para saber si es o no .MD
             mdFilesArray.push(file); // En caso de encontrarlo lo almacena en un array
           }else{
             if(mdFilesArray === []){ // Valida que en caso de no encontrar archivos .MD muestre el mensaje informativo
@@ -37,9 +37,8 @@ const mdLinks = (path, options) => {
         if(existMdFile(absolutePath)){ 
           mdFilesArray.push(absolutePath);
         }else{
-          if(mdFilesArray === []){ // Valida que en caso de no encontrar archivos .MD muestre el mensaje informativo
-            console.log(chalk.bgYellow.bold('---------- WARNING: no .md files ----------'));
-          }
+           // Valida que en caso de no encontrar archivos .MD muestre el mensaje informativo
+            console.log(chalk.bgYellow.bold('---------- WARNING: no .md files ----------'));          
         }
       }
 //--------------------------------------------------------------------------- Linea 48 
@@ -91,7 +90,7 @@ const mdLinks = (path, options) => {
           });
         }
       }else{
-        reject(chalk.bgRed.bold("---------- ERROR: The path does not exist ----------"));
+        console.log(chalk.bgRed.bold("---------- ERROR: The path does not exist ----------"));
       }
     }
   )};

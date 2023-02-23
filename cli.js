@@ -21,13 +21,7 @@ if (path) {
       console.log(chalk.bgRed.bold('ERROR: Please verify your params'))
   }
 };
-
   
-  
-
-
-  
-
 
 // ruta .md con links './testing/testConLinks01.md'
 // ruta .md sin links './testing/testSinLinks0.md'

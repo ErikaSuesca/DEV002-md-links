@@ -131,14 +131,11 @@ const getHttpResponse = (mdFilesArrayLink) => {
 
 }
 
-
-
 module.exports = {
   existPath,
   existMdFile,
   convertToAbsolute,
   validateDirectory,
-  validateReadFileMd,
   getResultValidateStats,
   getAllFilesDirectory,
   analyzeMdFilesArray, 
