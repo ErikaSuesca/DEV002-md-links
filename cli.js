@@ -3,21 +3,34 @@ const { mdLinks } = require("./index.js");
 const chalk = require('chalk');
 const process = require('process');
 
-
-
 const path = process.argv[2]
 const option1 = process.argv[3]
 const option2 = process.argv[4]
 
-if(path){
+if (path) {
+  console.log(chalk.bgMagenta.bold("----------   Md-Links START   ----------"));
   if (option1 === undefined && option2 === undefined) {
-      mdLinks(path, { validate: false, stats: false })
-          .then(result => result)
+      mdLinks(path, { validate: false, stats: false }).then(result => result)
+  } else if (option1 === '--validate' && option2 === undefined) {
+      mdLinks(path, { validate: true, stats: false }).then(result => result)
+  } else if (option1 === '--stats' && option2 === undefined) {
+      mdLinks(path, { validate: false, stats: true }).then(result => result)
+  } else if ((option1 === '--validate' && option2 === '--stats') || (option1 === '--stats' && option2 === '--validate')) {
+      mdLinks(path, { validate: true, stats: true }).then(result => result)
+  } else {
+      console.log(chalk.bgRed.bold('ERROR: Please verify your params'))
   }
 };
 
-// ruta .md con links './testing/test01.md'
-// ruta .md sin links './testing/test0.md'
+  
+  
+
+
+  
+
+
+// ruta .md con links './testing/testConLinks01.md'
+// ruta .md sin links './testing/testSinLinks0.md'
 // ruta archivo no .md './package.json'
 // ruta absoluta: C:\\Users\\Erika\\Desktop\\DEV002-md-links\\package.json
-// ruta relativa: ./testing/test0.md
+// ruta relativa: './testing/testSinLinks0.md'
