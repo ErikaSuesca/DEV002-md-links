@@ -171,6 +171,6 @@ Broken: 1
 
 En tu consola ejecuta el siguiente comando: 
 
- * npm i mdlinks-erikasuesca
+ * npm i mdlinks-erisuesca
 
  
