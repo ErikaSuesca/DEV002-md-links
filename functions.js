@@ -84,7 +84,7 @@ const getLinksDocument = (file, content) => {
   } else {
     const matches = content.match(linksRegex) // Obtiene las coincidencias de las expresiones regulares
     matches.forEach((item) => {
-      console.log('Item Value:' + item)
+      // console.log('Item Value:' + item)
       const matchestext = item.match(textRegex);
       let unitText = "";
       let originText = ['No text']
