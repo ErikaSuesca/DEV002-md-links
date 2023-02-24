@@ -10,21 +10,18 @@ const {
   getStatsResult,
 } = require("./functions.js");
 
-
 const chalk = require("chalk");
-let mdFilesArray = [];
-
 
 const mdLinks = (path, options) => {
-  
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
+    let mdFilesArray = [];
     if (existPath(path)) { 
       console.log(chalk.bgGreen.bold("---------- INFO: The path exist ----------"));
       const absolutePath = convertToAbsolute(path); // Se convierte path a absolute
       if(validateDirectory(absolutePath)){ // valida que el path sea de un directorio
         getAllFilesDirectory(absolutePath).forEach(file => { // readAllFilesRecursive obtiene los archivos que hay dentro del directorio
-          if(!existMdFile(file)){ // valida archivo por archivo para saber si es o no .MD
+          if(existMdFile(file)){ // valida archivo por archivo para saber si es o no .MD
             mdFilesArray.push(file); // En caso de encontrarlo lo almacena en un array
           }else{
             if(mdFilesArray === []){ // Valida que en caso de no encontrar archivos .MD muestre el mensaje informativo
@@ -41,14 +38,12 @@ const mdLinks = (path, options) => {
             console.log(chalk.bgYellow.bold('---------- WARNING: no .md files ----------'));          
         }
       }
-//--------------------------------------------------------------------------- Linea 48 
+//--------------------------------------------------------------------------------------------
       //En esta sección comienza a validar los parámetros enviados: **--validate** y **--stats**
       //Este es el proceso para realizar el proceso de Validate y Stats ()
       if (options.validate === true && options.stats === true) {
-
         analyzeMdFilesArray(mdFilesArray)
           .then((result) => {
-            //console.log(result)
             getHttpResponse(result)
               .then((result) => {
                 const resultValidateAndStats = getResultValidateStats(result)
@@ -79,7 +74,7 @@ const mdLinks = (path, options) => {
             console.log(valueStats)
             resolve(valueStats)
           });
-      // Acá ingresa cuando no se tienen agregadas las banderas
+      // Acá ingresa cuando no se tienen agregadas las banderas y se pasa unicamente el path
       } else {
         analyzeMdFilesArray(mdFilesArray)
           .then((result) => {

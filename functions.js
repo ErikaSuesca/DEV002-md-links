@@ -4,7 +4,7 @@ const chalk = require("chalk");
 const axios = require("axios").default;
 
 // Función para validar si existe la ruta
-const existPath = (paths) => fs.existsSync(paths); // CUMPLE
+const existPath = (paths) => fs.existsSync(paths); 
 
 // Función para validar si es un directorio
 const validateDirectory = (paths) => fs.statSync(paths).isDirectory(); // CUMPLE
@@ -13,7 +13,7 @@ const validateDirectory = (paths) => fs.statSync(paths).isDirectory(); // CUMPLE
 const existMdFile = (paths) => path.extname(paths) === ".md";
 
 //Función para convertir la ruta a absoluta
-const convertToAbsolute = (paths) => path.resolve(paths)
+const convertToAbsolute = (paths) => path.resolve(paths);
 
 // Función para leer los archivos que están dentro de un directorio
 function getAllFilesDirectory(path) {
@@ -33,9 +33,7 @@ function getAllFilesDirectory(path) {
 const analyzeMdFilesArray = (mdFilesArray) => {
   const backupArray = []
   return new Promise((resolve, reject) => {
-
     mdFilesArray.forEach((file, index) => {
-
       fs.readFile(`${file}`, 'utf-8', (err, content) => {
         if (err) {
           reject(chalk.bgRed.bold('---------- ERROR: Analyze .md Files ----------'));
@@ -86,6 +84,7 @@ const getLinksDocument = (file, content) => {
   } else {
     const matches = content.match(linksRegex) // Obtiene las coincidencias de las expresiones regulares
     matches.forEach((item) => {
+      console.log('Item Value:' + item)
       const matchestext = item.match(textRegex);
       let unitText = "";
       let originText = ['No text']
@@ -94,13 +93,16 @@ const getLinksDocument = (file, content) => {
         unitText = matchestext[0];
         originText = unitText.replace(/\[|\]/g, '').split(',');
       }
+      
       const matchesLink = item.match(urlRegex)
+      //console.log('Matches link: ' + matchesLink)
       const unitLink = matchesLink[0];
+      //console.log('Unit link: ' + unitLink)
       const originLink = unitLink.replace(/\(|\)/g, '').split(',');
+      //console.log('Origin Link ' + originLink)
 
       arrayResponse.push({ href: originLink[0], text: originText[0], path: `${file}` })
     })
-
     return arrayResponse;
   }
 }
@@ -126,9 +128,7 @@ const getHttpResponse = (mdFilesArrayLink) => {
         return responseValidate
       })
   })
-
   return Promise.all(validate)
-
 }
 
 module.exports = {
