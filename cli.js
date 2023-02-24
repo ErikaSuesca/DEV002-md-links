@@ -26,5 +26,3 @@ if (path) {
 // ruta .md con links './testing/testConLinks01.md'
 // ruta .md sin links './testing/testSinLinks0.md'
 // ruta archivo no .md './package.json'
-// ruta absoluta: C:\\Users\\Erika\\Desktop\\DEV002-md-links\\package.json
-// ruta relativa: './testing/testSinLinks0.md'
